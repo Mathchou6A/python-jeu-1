@@ -17,8 +17,16 @@ game = game() # charger notre jeu
 running = True
 
 while running:
-   screen.blit(background, (-850, -300)) # dessiner l'arrière-plan (-600, -100)
-   screen.blit(game.player.image, game.player.rect) #appeler l'image du joueur
+   
+   # dessiner l'arrière-plan (-600, -100)
+   screen.blit(background, (-850, -300)) 
+   
+   #appeler l'image du joueur
+   screen.blit(game.player.image, game.player.rect) 
+   
+   #appeler l'image du projectile
+   game.player.all_projectiles.draw(screen) # dessiner tous les projectiles du joueur
+   
    if game.perssed.get(pygame.K_d) and game.player.rect.x + game.player.rect.width < screen.get_width(): # si la touche droite est enfoncée
       game.player.move_right() # déplacer le joueur vers la droite   
    elif game.perssed.get(pygame.K_q) and game.player.rect.x > -30: # si la touche gauche est enfoncée et que le joueur ne dépace pas la gauche de l'écran
@@ -38,6 +46,11 @@ while running:
          print("Fermeture du jeu")
       elif event.type == pygame.KEYDOWN: # si une touche est enfoncée
          game.perssed[event.key] = True
+         
+         # decaler si la touche z est enfoncée pour lancer un projectile
+         if event.key == pygame.K_z:
+            game.player.launch_projectile()        
+         
       elif event.type == pygame.KEYUP: # si une touche est relâchée
          game.perssed[event.key] = False
 
