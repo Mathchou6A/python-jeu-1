@@ -4,7 +4,7 @@ pygame.init()
 
 
 # créer une fenêtre de jeux
-screen = pygame.display.set_mode((1200, 800))
+screen = pygame.display.set_mode((1800, 1000))
 pygame.display.set_caption("Jeu pour l'anglais et la NSI")
 
 background = pygame.image.load("assets/bg.jpg")
@@ -15,7 +15,7 @@ background = pygame.image.load("assets/bg.jpg")
 running = True
 
 while running:
-   screen.blit(background, (0, 0)) # dessiner l'arrière-plan
+   screen.blit(background, (-600, 0)) # dessiner l'arrière-plan
    pygame.display.flip() # mettre à jour l'affichage
    for event in pygame.event.get():
       if event.type == pygame.QUIT:
