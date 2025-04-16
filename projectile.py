@@ -1,5 +1,5 @@
 import pygame
-# from main import hauteur, largeur, screen # importer la largeur et la hauteur de l'écran
+
 
 # definir la classe qui va gérer les projectiles de notre joueur
 class projectile(pygame.sprite.Sprite):
@@ -30,7 +30,8 @@ class projectile(pygame.sprite.Sprite):
    def move(self):
       self.rect.x += self.velocity # deplacer le projectile vers la droite
       self.rotate() # faire tourner le projectile
-      if self.rect.x > 1800: # si le projectile depasse la largeur de l'écran
+      screen = pygame.display.get_surface()
+      if self.rect.x > screen.get_width(): # si le projectile depasse la largeur de l'écran
          self.remove() # supprimer le projectile si il depasse la largeur de l'écran
 
 

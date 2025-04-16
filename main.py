@@ -37,6 +37,11 @@ while running:
    #appeler l'image du projectile
    game.player.all_projectiles.draw(screen) # dessiner tous les projectiles du joueur
    
+   # appliquer l'ensemble des images de mon groupe de monstres
+   game.all_monsters.draw(screen) # dessiner tous les monstres
+   
+   
+   # verifier si le joueur soit aller à gauche ou à droite
    if game.perssed.get(pygame.K_d) and game.player.rect.x + game.player.rect.width < screen.get_width(): # si la touche droite est enfoncée
       game.player.move_right() # déplacer le joueur vers la droite   
    elif game.perssed.get(pygame.K_q) and game.player.rect.x > -30: # si la touche gauche est enfoncée et que le joueur ne dépace pas la gauche de l'écran
