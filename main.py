@@ -4,8 +4,13 @@ from game import game # importer notre jeu
 pygame.init()
 
 
+# largeur de la fenêtre
+largeur = 1550
+# hauteur de la fenêtre
+hauteur = 700
+
 # créer une fenêtre de jeux
-screen = pygame.display.set_mode((1550, 700)) # définir la taille de la fenêtre   (1800, 950)
+screen = pygame.display.set_mode((largeur, hauteur)) # définir la taille de la fenêtre   (1800, 950)
 pygame.display.set_caption("Jeu pour l'anglais et la NSI")
 
 background = pygame.image.load("assets/bg.jpg") # charger l'arrière-plan
@@ -16,6 +21,7 @@ game = game() # charger notre jeu
 # boucle de jeu
 running = True
 
+
 while running:
    
    # dessiner l'arrière-plan (-600, -100)
@@ -24,6 +30,10 @@ while running:
    #appeler l'image du joueur
    screen.blit(game.player.image, game.player.rect) 
    
+   #récupérer tous les projectiles du joueur
+   for projectile in game.player.all_projectiles:
+      projectile.move()
+   
    #appeler l'image du projectile
    game.player.all_projectiles.draw(screen) # dessiner tous les projectiles du joueur
    
@@ -31,7 +41,6 @@ while running:
       game.player.move_right() # déplacer le joueur vers la droite   
    elif game.perssed.get(pygame.K_q) and game.player.rect.x > -30: # si la touche gauche est enfoncée et que le joueur ne dépace pas la gauche de l'écran
       game.player.move_left() # déplacer le joueur vers la gauche
-   print(game.player.rect.x) # afficher la position du joueur
       
       
       
