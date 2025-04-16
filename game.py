@@ -6,6 +6,7 @@ class game:
    def __init__(self):
       # generer notre joueur
       self.player = player()
+      self.perssed = {}
       
       
       
