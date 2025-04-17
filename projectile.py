@@ -32,9 +32,11 @@ class projectile(pygame.sprite.Sprite):
       self.rotate() # faire tourner le projectile
       
       # verifier si le projectile touche un monstre
-      if self.player.game.check_collision(self, self.player.game.all_monsters): # si le projectile touche un monstre
+      for monster in self.player.game.check_collision(self, self.player.game.all_monsters): # si le projectile touche un monstre
          # suppression du projectile
          self.remove()
+         # infliger des dégats au monstre
+         monster.damage(self.player.attack)
       
       screen = pygame.display.get_surface()
       if self.rect.x > screen.get_width(): # si le projectile depasse la largeur de l'écran

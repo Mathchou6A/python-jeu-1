@@ -23,7 +23,7 @@ running = True
 
 
 while running:
-   
+   # print(screen.get_width())
    # dessiner l'arrière-plan (-600, -100)
    screen.blit(background, (-850, -300)) 
    
@@ -67,9 +67,11 @@ while running:
          game.perssed[event.key] = True
          
          # decaler si la touche z est enfoncée pour lancer un projectile
-         if event.key == pygame.K_z:
-            game.player.launch_projectile()        
-         
+      # Déclenchement avec un clic gauche de souris
+      elif event.type == pygame.MOUSEBUTTONDOWN:
+         if event.button == 1:  # 1 = bouton gauche
+            game.player.launch_projectile()
+      
       elif event.type == pygame.KEYUP: # si une touche est relâchée
          game.perssed[event.key] = False
 

@@ -1,4 +1,5 @@
 import pygame
+import random
 
 # créer une classe qui va gérer les monstres
 class Monster(pygame.sprite.Sprite):
@@ -10,10 +11,21 @@ class Monster(pygame.sprite.Sprite):
       self.max_health = 100
       self.health = 100
       self.attack = 5 
-      self.rect.x = 1430 # position x du monstre
+      self.rect.x = 1550 + random.randint(0, 500) # position x du monstre
       self.rect.y = 450 # position y du monstre
-      self.velocity = 2 # vitesse du monstre
-      
+      self.velocity = random.randint(1, 3) # vitesse du monstre
+   
+   def damage(self, damage):
+      # infliger des dégâts au monstre
+      self.health -= damage
+      # vérifier si sont nouveau de vie est inférieur ou égal à 0
+      if self.health <= 0:
+         # reapparaitre comme un nouveau monstre
+         self.health = self.max_health
+         self.rect.x = 1550 + random.randint(0, 500)
+         self.velocity = random.randint(1, 3)
+   
+   
    def update_health_bar(self, surface):
       # définir une couleur pour la barre de vie (vert clair)
       bar_color = (111, 210, 46)
