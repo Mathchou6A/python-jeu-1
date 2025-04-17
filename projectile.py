@@ -30,6 +30,12 @@ class projectile(pygame.sprite.Sprite):
    def move(self):
       self.rect.x += self.velocity # deplacer le projectile vers la droite
       self.rotate() # faire tourner le projectile
+      
+      # verifier si le projectile touche un monstre
+      if self.player.game.check_collision(self, self.player.game.all_monsters): # si le projectile touche un monstre
+         # suppression du projectile
+         self.remove()
+      
       screen = pygame.display.get_surface()
       if self.rect.x > screen.get_width(): # si le projectile depasse la largeur de l'écran
          self.remove() # supprimer le projectile si il depasse la largeur de l'écran
