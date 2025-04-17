@@ -43,6 +43,7 @@ while running:
    # recuperer tous les monstres du groupe de monstres
    for monster in game.all_monsters:
       monster.forward() # faire avancer le monstre
+      monster.update_health_bar(screen) # mettre à jour la barre de vie du monstre
    
    
    # verifier si le joueur soit aller à gauche ou à droite
