@@ -24,11 +24,15 @@ running = True
 
 while running:
    # print(screen.get_width())
-   # dessiner l'arrière-plan (-600, -100)
+   # print(screen.get_height())
+   # appliquer l'image de fond
    screen.blit(background, (-850, -300)) 
    
-   #appeler l'image du joueur
+   #appliquer l'image du joueur
    screen.blit(game.player.image, game.player.rect) 
+   
+   # actualiser la barre de vie du joueur
+   game.player.update_health_bar(screen) # mettre à jour la barre de vie du joueur
    
    #récupérer tous les projectiles du joueur
    for projectile in game.player.all_projectiles:

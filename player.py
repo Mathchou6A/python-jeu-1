@@ -15,7 +15,25 @@ class player(pygame.sprite.Sprite):
       self.all_projectiles = pygame.sprite.Group()
       self.rect.x = 400
       self.rect.y = 400
-      
+   
+   
+   def damage(self, damage):
+      if self.health - damage > damage:
+         self.health -= damage
+
+      if self.health <= 0:
+         # reapparaitre comme un nouveau joueur
+         self.health = self.max_health
+         self.rect.x = 400
+         self.rect.y = 400
+         
+         
+   
+   def update_health_bar(self, surface):
+      # dessiner l'arrière-plan de la barre de vie
+      pygame.draw.rect(surface, (60, 63, 60), [self.rect.x + 50, self.rect.y + 20, self.max_health, 7])
+      # dessiner la barre de vie
+      pygame.draw.rect(surface, (111, 210, 46), [self.rect.x + 50, self.rect.y + 20, self.health, 7])   
       
    def launch_projectile(self):       # lancer un projectile
       self.all_projectiles.add(projectile(self))
