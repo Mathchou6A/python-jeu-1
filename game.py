@@ -1,21 +1,27 @@
-import pygame
 from player import player # importer notre joueur
 from monster import Monster # importer notre monstre
+import pygame
 
 # créer une classe qui va représenter notre jeu
 class game:
    def __init__(self):
       # generer notre joueur
-      self.player = player()
+      self.all_players = pygame.sprite.Group()
+      self.player = player(self)
+      self.all_players.add(self.player)
       
-      #groupe de monsetres
-      self.all_monsters = pygame.sprite.Group()      
+      #groupe de monstres
+      self.all_monsters = pygame.sprite.Group()
       self.perssed = {}
-      self.spawn_monster() # faire spawn un monstre
-      
+      self.spawn_monster()
+
+   def check_collision(self, sprite, group):
+      return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask) # vérifier si le joueur touche un monstre
+
    def spawn_monster(self):
-      monster = Monster()
-      self.monster.rect.x = 800
-      self.all_monsters.add(monster) # ajouter le monstre au groupe de monstres
+      monster = Monster(self) # créer un monstre
+      self.all_monsters.add(monster) # ajouter le monstre à notre groupe de monstres
+
+
 
 

@@ -40,6 +40,10 @@ while running:
    # appliquer l'ensemble des images de mon groupe de monstres
    game.all_monsters.draw(screen) # dessiner tous les monstres
    
+   # recuperer tous les monstres du groupe de monstres
+   for monster in game.all_monsters:
+      monster.forward() # faire avancer le monstre
+   
    
    # verifier si le joueur soit aller à gauche ou à droite
    if game.perssed.get(pygame.K_d) and game.player.rect.x + game.player.rect.width < screen.get_width(): # si la touche droite est enfoncée
