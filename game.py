@@ -1,21 +1,24 @@
 from player import player # importer notre joueur
 from monster import Monster # importer notre monstre
+from comet_event import CometFallEvent
 import pygame
 
 # créer une classe qui va représenter notre jeu
 class game:
    def __init__(self):
       # def si notre jeu a comancé
-      self.is_playing = False
+      self.is_playing = True
       # generer notre joueur
       self.all_players = pygame.sprite.Group()
       self.player = player(self)
       self.all_players.add(self.player)
+      # générer l'évenement 
+      self.comet_event = CometFallEvent(self)
       
       #groupe de monstres
       self.all_monsters = pygame.sprite.Group()
       self.perssed = {}
-   
+
    
    def start(self):
       self.is_playing = True
@@ -35,6 +38,9 @@ class game:
       # actualiser la barre de vie du joueur
       self.player.update_health_bar(screen) # mettre à jour la barre de vie du joueur
       
+      # actualiser la barre d'evenement du jeu
+      self.comet_event.update_bar(screen) # mettre à jour la barre d'événement
+      
       #récupérer tous les projectiles du joueur
       for projectile in self.player.all_projectiles:
          projectile.move()
@@ -44,11 +50,18 @@ class game:
          monster.forward() # faire avancer le monstre
          monster.update_health_bar(screen) # mettre à jour la barre de vie du monstre
       
+      # récupérerles les comets de notre jeu
+      for comet in self.comet_event.all_comets:
+         comet.fall_comet()
+      
       #appeler l'image du projectile
       self.player.all_projectiles.draw(screen) # dessiner tous les projectiles du joueur
       
       # appliquer l'ensemble des images de mon groupe de monstres
       self.all_monsters.draw(screen) # dessiner tous les monstres
+      
+      # appliquer l'ensemble des images de mon groupe de comètes
+      self.comet_event.all_comets.draw(screen)
       
       # verifier si le joueur soit aller à gauche ou à droite
       if self.perssed.get(pygame.K_d) and self.player.rect.x + self.player.rect.width < screen.get_width(): # si la touche droite est enfoncée

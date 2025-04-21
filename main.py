@@ -1,7 +1,7 @@
-
+from game import game
 import pygame
 import math
-from game import game # importer notre jeu
+
 pygame.init()
 
 
