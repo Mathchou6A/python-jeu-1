@@ -1,5 +1,6 @@
 
 import pygame
+import math
 from game import game # importer notre jeu
 pygame.init()
 
@@ -15,6 +16,24 @@ pygame.display.set_caption("Jeu pour l'anglais et la NSI")
 
 background = pygame.image.load("assets/bg.jpg") # charger l'arrière-plan
 
+
+
+# charger notre bannière
+banner = pygame.image.load("assets/banner.png") # charger la bannière
+banner = pygame.transform.scale(banner, (500, 500)) # redimensionner la bannière
+banner_rect = banner.get_rect() # récupérer le rectangle de la bannière
+banner_rect.x = math.ceil(screen.get_width() // 2 - banner.get_width() // 2) # centrer la bannière
+
+# charger notre bouton pour lancer le jeu
+play_button = pygame.image.load("assets/button.png") # charger le bouton
+play_button = pygame.transform.scale(play_button, (400, 150)) # redimensionner le bouton
+play_button_rect = play_button.get_rect() # récupérer le rectangle du bouton
+play_button_rect.x = math.ceil(screen.get_width() // 2 - play_button.get_width() // 2) # centrer le bouton
+play_button_rect.y = math.ceil(screen.get_height() // 2 + play_button.get_height() // 2) # centrer le bouton
+
+
+
+
 game = game() # charger notre jeu
 
 
@@ -28,36 +47,13 @@ while running:
    # appliquer l'image de fond
    screen.blit(background, (-850, -300)) 
    
-   #appliquer l'image du joueur
-   screen.blit(game.player.image, game.player.rect) 
-   
-   # actualiser la barre de vie du joueur
-   game.player.update_health_bar(screen) # mettre à jour la barre de vie du joueur
-   
-   #récupérer tous les projectiles du joueur
-   for projectile in game.player.all_projectiles:
-      projectile.move()
-   
-   #appeler l'image du projectile
-   game.player.all_projectiles.draw(screen) # dessiner tous les projectiles du joueur
-   
-   # appliquer l'ensemble des images de mon groupe de monstres
-   game.all_monsters.draw(screen) # dessiner tous les monstres
-   
-   # recuperer tous les monstres du groupe de monstres
-   for monster in game.all_monsters:
-      monster.forward() # faire avancer le monstre
-      monster.update_health_bar(screen) # mettre à jour la barre de vie du monstre
-   
-   
-   # verifier si le joueur soit aller à gauche ou à droite
-   if game.perssed.get(pygame.K_d) and game.player.rect.x + game.player.rect.width < screen.get_width(): # si la touche droite est enfoncée
-      game.player.move_right() # déplacer le joueur vers la droite   
-   elif game.perssed.get(pygame.K_q) and game.player.rect.x > -30: # si la touche gauche est enfoncée et que le joueur ne dépace pas la gauche de l'écran
-      game.player.move_left() # déplacer le joueur vers la gauche
-      
-      
-      
+   # verifier si le jeu a commencé
+   if game.is_play:
+      game.update(screen) # declencher les instruction de la partie
+   else:
+      # afficher la bannière
+      screen.blit(banner, banner_rect) # afficher la bannière
+      screen.blit(play_button, play_button_rect) # afficher le bouton
       
       
       
@@ -78,7 +74,12 @@ while running:
       
       elif event.type == pygame.KEYUP: # si une touche est relâchée
          game.perssed[event.key] = False
-
+         
+      elif event.type == pygame.MOUSEBUTTONDOWN: # verif si le bouton est cliqué
+         if play_button_rect.collidepoint(event.pos):
+            game.is_play = True # si le bouton est cliqué, le jeu commence
+            print("Le jeu a commencé")
+         
 
 
 
