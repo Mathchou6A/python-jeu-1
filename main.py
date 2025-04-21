@@ -48,7 +48,7 @@ while running:
    screen.blit(background, (-850, -300)) 
    
    # verifier si le jeu a commencé
-   if game.is_play:
+   if game.is_playing:
       game.update(screen) # declencher les instruction de la partie
    else:
       # afficher la bannière
@@ -65,21 +65,21 @@ while running:
          print("Fermeture du jeu")
       elif event.type == pygame.KEYDOWN: # si une touche est enfoncée
          game.perssed[event.key] = True
-         
-         # decaler si la touche z est enfoncée pour lancer un projectile
+      
       # Déclenchement avec un clic gauche de souris
       elif event.type == pygame.MOUSEBUTTONDOWN:
-         if event.button == 1:  # 1 = bouton gauche
-            game.player.launch_projectile()
+         # vérifier si clic sur le bouton play
+         if game.is_playing == False: # si le jeu n'a pas commencé
+            if play_button_rect.collidepoint(event.pos):
+                  game.is_playing = True
+                  print("Jeu commencé")
+         else:
+                        game.player.launch_projectile()
       
       elif event.type == pygame.KEYUP: # si une touche est relâchée
          game.perssed[event.key] = False
          
-      elif event.type == pygame.MOUSEBUTTONDOWN: # verif si le bouton est cliqué
-         if play_button_rect.collidepoint(event.pos):
-            game.is_play = True # si le bouton est cliqué, le jeu commence
-            print("Le jeu a commencé")
-         
+
 
 
 

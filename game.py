@@ -6,7 +6,7 @@ import pygame
 class game:
    def __init__(self):
       # def si notre jeu a comancé
-      self.is_play = False
+      self.is_playing = False
       # generer notre joueur
       self.all_players = pygame.sprite.Group()
       self.player = player(self)
@@ -29,17 +29,16 @@ class game:
       for projectile in self.player.all_projectiles:
          projectile.move()
       
-      #appeler l'image du projectile
-      self.player.all_projectiles.draw(screen) # dessiner tous les projectiles du joueur
-      
-      # appliquer l'ensemble des images de mon groupe de monstres
-      self.all_monsters.draw(screen) # dessiner tous les monstres
-      
       # recuperer tous les monstres du groupe de monstres
       for monster in self.all_monsters:
          monster.forward() # faire avancer le monstre
          monster.update_health_bar(screen) # mettre à jour la barre de vie du monstre
       
+      #appeler l'image du projectile
+      self.player.all_projectiles.draw(screen) # dessiner tous les projectiles du joueur
+      
+      # appliquer l'ensemble des images de mon groupe de monstres
+      self.all_monsters.draw(screen) # dessiner tous les monstres
       
       # verifier si le joueur soit aller à gauche ou à droite
       if self.perssed.get(pygame.K_d) and self.player.rect.x + self.player.rect.width < screen.get_width(): # si la touche droite est enfoncée
