@@ -71,8 +71,8 @@ while running:
          # vérifier si clic sur le bouton play
          if game.is_playing == False: # si le jeu n'a pas commencé
             if play_button_rect.collidepoint(event.pos):
-                  game.is_playing = True
-                  print("Jeu commencé")
+               game.start()
+               print("Jeu commencé")
          else:
                         game.player.launch_projectile()
       

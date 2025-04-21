@@ -20,14 +20,10 @@ class player(pygame.sprite.Sprite):
    def damage(self, damage):
       if self.health - damage > damage:
          self.health -= damage
+      else:
+         # si la vie du joueur est inférieure à 0, il meurt
+         self.game.game_over()
 
-      if self.health <= 0:
-         # reapparaitre comme un nouveau joueur
-         self.health = self.max_health
-         self.rect.x = 400
-         self.rect.y = 400
-         
-         
    
    def update_health_bar(self, surface):
       # dessiner l'arrière-plan de la barre de vie

@@ -15,8 +15,18 @@ class game:
       #groupe de monstres
       self.all_monsters = pygame.sprite.Group()
       self.perssed = {}
+   
+   
+   def start(self):
+      self.is_playing = True
       self.spawn_monster()
       self.spawn_monster()
+   
+   def game_over(self):
+      self.all_monsters = pygame.sprite.Group() # vider le groupe de monstres
+      self.player.health = self.player.max_health # remettre la vie du joueur à 100
+      self.is_playing = False # remettre le jeu en attente
+
       
    def update(self, screen):
       #appliquer l'image du joueur
