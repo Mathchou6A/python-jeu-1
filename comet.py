@@ -9,7 +9,7 @@ class Comet(pygame.sprite.Sprite):
       # def l'image de la comète
       self.image = pygame.image.load('assets/comet.png')
       self.rect = self.image.get_rect()
-      self.velocity = random.randint(1, 3)
+      self.velocity = random.randint(3, 5)
       self.rect.x = random.randint(-30, 1500) # position x aléatoire
       self.rect.y = - random.randint(0, 800) # position y aléatoire
       self.comet_event = comet_event # l'événement de la comète

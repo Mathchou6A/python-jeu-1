@@ -6,7 +6,7 @@ from comet import Comet # importer notre comète
 class CometFallEvent:
    def __init__(self, game):
       self.percent = 0
-      self.percent_speed = 7
+      self.percent_speed = 5
       self.game = game
       self.fall_mode = False
       
@@ -24,8 +24,10 @@ class CometFallEvent:
       self.percent = 0
    
    def meteor_fall(self):
-      # apparaitre 1 première comète
-      self.all_comets.add(Comet(self))
+      # boucle pour les valeurs entre 1 et 10
+      for i in range(1, 15):
+         # apparaitre 1 première comète
+         self.all_comets.add(Comet(self))
    
    def attempt_fall(self):
       # la jauge d'evénement est pleine
