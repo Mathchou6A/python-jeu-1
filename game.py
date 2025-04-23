@@ -1,7 +1,10 @@
 from player import player # importer notre joueur
 from monster import Alien, Monster, Mummy # importer notre monstre
+from sounds import SoundManager # importer notre gestionnaire de son
 from comet_event import CometFallEvent
 import pygame
+
+
 
 # créer une classe qui va représenter notre jeu
 class game:
@@ -17,6 +20,9 @@ class game:
       
       #groupe de monstres
       self.all_monsters = pygame.sprite.Group()
+      
+      # gérer le sond
+      self.sound_manager = SoundManager()
       
       # mettre le score à 0
       self.font = pygame.font.Font('assets/ChelaOne-Regular.ttf', 25) # définir la police
@@ -42,6 +48,8 @@ class game:
       self.player.health = self.player.max_health # remettre la vie du joueur à 100
       self.is_playing = False # remettre le jeu en attente
       self.score = 0 # remettre le score à 0
+      # jouer le son de game over
+      self.sound_manager.play('game_over') # jouer le son de game over
       
 
       

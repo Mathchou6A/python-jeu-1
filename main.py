@@ -78,6 +78,8 @@ while running:
             if play_button_rect.collidepoint(event.pos):
                game.start()
                print("Jeu commencé")
+               # jouer le sond
+               game.sound_manager.play('click') # jouer le son de clic
          else:
             game.player.launch_projectile()
       
