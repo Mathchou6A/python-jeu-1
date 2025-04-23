@@ -23,8 +23,7 @@ class Comet(pygame.sprite.Sprite):
          # remettre la barre d'événement à 0
          self.comet_event.reset_percent()
          # apparaitre les 2 premier monstres
-         self.comet_event.game.spawn_monster()
-         self.comet_event.game.spawn_monster()
+         self.comet_event.game.start() # démarrer le jeu
    
    def fall_comet(self):
       # faire tomber la comète

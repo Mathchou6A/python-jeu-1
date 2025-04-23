@@ -1,5 +1,5 @@
 from player import player # importer notre joueur
-from monster import Monster # importer notre monstre
+from monster import Alien, Monster, Mummy # importer notre monstre
 from comet_event import CometFallEvent
 import pygame
 
@@ -22,8 +22,9 @@ class game:
    
    def start(self):
       self.is_playing = True
-      self.spawn_monster()
-      self.spawn_monster()
+      self.spawn_monster(Mummy)
+      self.spawn_monster(Mummy)
+      self.spawn_monster(Alien)
    
    def game_over(self):
       self.all_monsters = pygame.sprite.Group() # vider le groupe de monstres
@@ -80,9 +81,8 @@ class game:
    def check_collision(self, sprite, group):
       return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask) # vérifier si le joueur touche un monstre
    
-   def spawn_monster(self):
-      monster = Monster(self) # créer un monstre
-      self.all_monsters.add(monster) # ajouter le monstre à notre groupe de monstres
+   def spawn_monster(self, monster_class_name):
+      self.all_monsters.add(monster_class_name.__call__(self)) # ajouter le monstre à notre groupe de monstres
 
 
 

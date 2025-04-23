@@ -4,17 +4,23 @@ import animation
 
 # créer une classe qui va gérer les monstres
 class Monster(animation.AnimateSprite):
-   def __init__(self, game):
-      super().__init__("mummy")
+   def __init__(self, game, name, size, offset=0):
+      super().__init__(name, size)
       self.game = game
       self.rect = self.image.get_rect()
       self.max_health = 100
       self.health = 100
       self.attack = 0.3
       self.rect.x = 1550 + random.randint(0, 500) # position x du monstre
-      self.rect.y = 450 # position y du monstre
-      self.velocity = random.randint(1, 3) # vitesse du monstre
+      self.rect.y = 450 - offset # position y du monstre
       self.start_animation()
+   
+   
+   def set_speed(self, speed):
+      self.default_speed = speed # vitesse par défaut du monstre
+      self.velocity = random.randint(1, speed) # vitesse du monstre
+
+   
    
    def damage(self, damage):
       # infliger des dégâts au monstre
@@ -24,7 +30,7 @@ class Monster(animation.AnimateSprite):
          # reapparaitre comme un nouveau monstre
          self.health = self.max_health
          self.rect.x = 1550 + random.randint(0, 500)
-         self.velocity = random.randint(1, 3)
+         self.velocity = random.randint(1, self.default_speed) # réinitialiser la vitesse du monstre
          
          # si la bar d'evenement est chagé a son max
          if self.game.comet_event.is_full_loaded():
@@ -52,5 +58,21 @@ class Monster(animation.AnimateSprite):
       else:
          # infliger des dégâts au joueur
          self.game.player.damage(self.attack)
+
+
+# définir une classe pour la momie
+class Mummy(Monster):
+   def __init__(self, game):
+      super().__init__(game, 'mummy', (130, 130))
+      self.set_speed(5) # vitesse de la momie
+
+# def une classe pour l'alien
+class Alien(Monster):
+   def __init__(self, game):
+      super().__init__(game, 'alien', (300, 300), offset=140)
+      self.health = 250
+      self.max_health = 250
+      self.attack = 0.8
+      self.set_speed(3) # vitesse de l'alien
 
 

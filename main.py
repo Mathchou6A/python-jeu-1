@@ -4,6 +4,11 @@ import math
 
 pygame.init()
 
+# def une clock 
+clock = pygame.time.Clock() # créer une horloge pour le jeu
+# définir le nombre de FPS
+FPS = 60 # définir le nombre de FPS
+
 
 # largeur de la fenêtre
 largeur = 1550
@@ -74,12 +79,13 @@ while running:
                game.start()
                print("Jeu commencé")
          else:
-                        game.player.launch_projectile()
+            game.player.launch_projectile()
       
       elif event.type == pygame.KEYUP: # si une touche est relâchée
          game.perssed[event.key] = False
          
-
+   # limiter le nombre de FPS
+   clock.tick(FPS) # limiter le nombre de FPS
 
 
 
