@@ -71,7 +71,7 @@ class Monster(animation.AnimateSprite):
 class Mummy(Monster):
    def __init__(self, game):
       super().__init__(game, 'mummy', (130, 130))
-      self.set_speed(5) # vitesse de la momie
+      self.set_speed(6) # vitesse de la momie
       self.set_loot_amount(20)
 
 # def une classe pour l'alien
@@ -80,8 +80,8 @@ class Alien(Monster):
       super().__init__(game, 'alien', (300, 300), offset=140)
       self.health = 250
       self.max_health = 250
-      self.attack = 0.8
-      self.set_speed(3) # vitesse de l'alien
+      self.attack = 1
+      self.set_speed(4) # vitesse de l'alien
       self.set_loot_amount(80)
 
 

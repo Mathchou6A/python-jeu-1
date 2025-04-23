@@ -25,7 +25,7 @@ class CometFallEvent:
    
    def meteor_fall(self):
       # boucle pour les valeurs entre 1 et 10
-      for i in range(1, 15):
+      for i in range(1, 30):
          # apparaitre 1 première comète
          self.all_comets.add(Comet(self))
    
