@@ -1,12 +1,12 @@
 import pygame
 import random
+import animation
 
 # créer une classe qui va gérer les monstres
-class Monster(pygame.sprite.Sprite):
+class Monster(animation.AnimateSprite):
    def __init__(self, game):
-      super().__init__()
+      super().__init__("mummy")
       self.game = game
-      self.image = pygame.image.load("assets/mummy.png")  
       self.rect = self.image.get_rect()
       self.max_health = 100
       self.health = 100
@@ -14,6 +14,7 @@ class Monster(pygame.sprite.Sprite):
       self.rect.x = 1550 + random.randint(0, 500) # position x du monstre
       self.rect.y = 450 # position y du monstre
       self.velocity = random.randint(1, 3) # vitesse du monstre
+      self.start_animation()
    
    def damage(self, damage):
       # infliger des dégâts au monstre
@@ -33,6 +34,8 @@ class Monster(pygame.sprite.Sprite):
             # appeler la fonction pour essayer de faire tomber la comète
             self.game.comet_event.attempt_fall()  
    
+   def update_animation(self):
+      self.animate() # si on veux que l'animation du monstre reste en boucle : self.animate(loop=True)
    
    def update_health_bar(self, surface):
       # dessiner l'arrière-plan de la barre de vie
@@ -45,6 +48,7 @@ class Monster(pygame.sprite.Sprite):
       # le déplacement ne se fait que si le monstre n'est pas en collision avec un groupe de joueurs
       if not self.game.check_collision(self, self.game.all_players):
          self.rect.x -= self.velocity
+         self.start_animation() # démarrer l'animation
       else:
          # infliger des dégâts au joueur
          self.game.player.damage(self.attack)
