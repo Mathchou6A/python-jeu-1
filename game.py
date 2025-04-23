@@ -32,6 +32,9 @@ class game:
       self.spawn_monster(Mummy)
       self.spawn_monster(Alien)
    
+   def add_score(self, points=10):
+      self.score += points
+   
    def game_over(self):
       self.all_monsters = pygame.sprite.Group() # vider le groupe de monstres
       self.comet_event.all_comets = pygame.sprite.Group() # vider le groupe de comètes

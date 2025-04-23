@@ -14,12 +14,16 @@ class Monster(animation.AnimateSprite):
       self.rect.x = 1550 + random.randint(0, 500) # position x du monstre
       self.rect.y = 450 - offset # position y du monstre
       self.start_animation()
+      self.loot_amount = 10
    
    
    def set_speed(self, speed):
       self.default_speed = speed # vitesse par défaut du monstre
       self.velocity = random.randint(1, speed) # vitesse du monstre
-
+   
+   
+   def set_loot_amount(self, amount):
+      self.loot_amount = amount
    
    
    def damage(self, damage):
@@ -31,6 +35,9 @@ class Monster(animation.AnimateSprite):
          self.health = self.max_health
          self.rect.x = 1550 + random.randint(0, 500)
          self.velocity = random.randint(1, self.default_speed) # réinitialiser la vitesse du monstre
+         
+         # ajouter le nombre de poits score
+         self.game.add_score(self.loot_amount) # ajouter 1 point de score
          
          # si la bar d'evenement est chagé a son max
          if self.game.comet_event.is_full_loaded():
@@ -65,6 +72,7 @@ class Mummy(Monster):
    def __init__(self, game):
       super().__init__(game, 'mummy', (130, 130))
       self.set_speed(5) # vitesse de la momie
+      self.set_loot_amount(20)
 
 # def une classe pour l'alien
 class Alien(Monster):
@@ -74,5 +82,6 @@ class Alien(Monster):
       self.max_health = 250
       self.attack = 0.8
       self.set_speed(3) # vitesse de l'alien
+      self.set_loot_amount(80)
 
 
