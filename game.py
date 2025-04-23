@@ -17,6 +17,12 @@ class game:
       
       #groupe de monstres
       self.all_monsters = pygame.sprite.Group()
+      
+      # mettre le score à 0
+      self.font = pygame.font.Font('assets/ChelaOne-Regular.ttf', 25) # définir la police
+
+      self.score = 0
+      
       self.perssed = {}
 
    
@@ -32,10 +38,15 @@ class game:
       self.comet_event.reset_percent() # remettre la barre d'événement à 0
       self.player.health = self.player.max_health # remettre la vie du joueur à 100
       self.is_playing = False # remettre le jeu en attente
+      self.score = 0 # remettre le score à 0
       
 
       
    def update(self, screen):
+      # afficher le score sur l'écran
+      score_text = self.font.render(f"Score: {self.score}", 1, (0, 0, 0)) # définir le texte
+      screen.blit(score_text, (20, 20)) # afficher le texte sur l'écran
+      
       #appliquer l'image du joueur
       screen.blit(self.player.image, self.player.rect) 
       
