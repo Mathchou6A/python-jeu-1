@@ -6,8 +6,9 @@ from comet import Comet # importer notre comète
 class CometFallEvent:
    def __init__(self, game):
       self.percent = 0
-      self.percent_speed = 33 
+      self.percent_speed = 7
       self.game = game
+      self.fall_mode = False
       
       # définir un groupe spraite pour les comètes
       self.all_comets = pygame.sprite.Group()
@@ -28,18 +29,17 @@ class CometFallEvent:
    
    def attempt_fall(self):
       # la jauge d'evénement est pleine
-      if self.is_full_loaded():
+      if self.is_full_loaded() and len(self.game.all_monsters) == 0:
          # si la barre d'événement est pleine, on fait tomber la comète
          print("pluie de comète !!")
          self.meteor_fall() # ajouter une comète à notre groupe de comètes
-         self.reset_percent() # remettre la barre d'événement à 0
+         self.fall_mode = True # activer le mode de chute de comète
    
    def update_bar(self, surface):
       #ajouter 1% à la barre d'événement
       self.add_percent()
       
-      # appeler la fonction pour essayer de faire tomber la comète
-      self.attempt_fall()
+
       
       # barre noir (en arrière plan)
       pygame.draw.rect(surface, (0, 0, 0), [

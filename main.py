@@ -1,4 +1,4 @@
-from game import game
+from game import game 
 import pygame
 import math
 
