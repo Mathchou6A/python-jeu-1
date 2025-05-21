@@ -11,9 +11,9 @@ FPS = 60 # définir le nombre de FPS
 
 
 # largeur de la fenêtre
-largeur = 1550
+largeur = 1280    # 1550
 # hauteur de la fenêtre
-hauteur = 700
+hauteur = 650     # 700
 
 # créer une fenêtre de jeux
 screen = pygame.display.set_mode((largeur, hauteur)) # définir la taille de la fenêtre   (1800, 950)
